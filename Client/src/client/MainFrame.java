@@ -1,24 +1,20 @@
 package client;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JScrollPane;
-import javax.swing.JTextPane;
-import javax.swing.JEditorPane;
-import javax.swing.JButton;
-
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.Vector;
 
-import javax.swing.JList;
+import javax.swing.JButton;
+import javax.swing.JEditorPane;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextPane;
+import javax.swing.border.EmptyBorder;
 
 public class MainFrame extends JFrame {
+	private static final long serialVersionUID = -4905802514617108935L;
+
 	private JTextPane textPane;
 	public JTextPane getTextPane() {
 		return textPane;
@@ -30,7 +26,7 @@ public class MainFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MainFrame(User user) {
+	public MainFrame(final User user) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -44,7 +40,7 @@ public class MainFrame extends JFrame {
 		contentPane.add(textPane);
 //		JScrollPane jsp = new JScrollPane(textPane);
 //		contentPane.add(jsp);
-		JEditorPane editorPane = new JEditorPane();
+		final JEditorPane editorPane = new JEditorPane();
 		editorPane.setBounds(10, 129, 336, 121);
 		contentPane.add(editorPane);
 
