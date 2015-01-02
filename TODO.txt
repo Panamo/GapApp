@@ -1,0 +1,6 @@
+Say your opinion here if you have new thoughts:
+
+1. Agree on security for different parts of transmission and saved datas
+2. Design GUI
+3. Agree on pattern of data transmission(parham recommended something)
+4. Agree on features of GapApp
