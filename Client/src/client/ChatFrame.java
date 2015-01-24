@@ -13,15 +13,13 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
+import javax.swing.JScrollPane;
 
 public class ChatFrame extends JFrame {
 	public boolean open = false;
-	private JTextPane textPane;
-	public JTextPane getTextPane() {
-		return textPane;
-	}
 	
 	private JPanel contentPane;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Create the frame.
@@ -35,15 +33,16 @@ public class ChatFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		textPane = new JTextPane();
-		textPane.setEditable(false);
-		textPane.setBounds(10, 11, 414, 107);
-		contentPane.add(textPane);
-//		JScrollPane jsp = new JScrollPane(textPane);
-//		contentPane.add(jsp);
 		JEditorPane editorPane = new JEditorPane();
 		editorPane.setBounds(10, 129, 336, 121);
 		contentPane.add(editorPane);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 11, 414, 108);
+		contentPane.add(scrollPane);
+		
+		JTextPane textPane = new JTextPane();
+		scrollPane.setViewportView(textPane);
 
 		JButton sendButton = new JButton("Send");
 		sendButton.addActionListener(new ActionListener() {
@@ -54,10 +53,6 @@ public class ChatFrame extends JFrame {
 					user.sendToServer("send",chat.getID(),text);
 					textPane.setText(textPane.getText() + "Me: " + text + "\n");
 					editorPane.setText("");
-					//String history;
-//					if ((history = textPane.getText()).split("\n").length>=7){
-//						textPane.setText("");
-//				}
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -71,5 +66,4 @@ public class ChatFrame extends JFrame {
 	public JPanel getContentPane() {
 		return contentPane;
 	}
-
 }

@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JList;
 import java.util.Vector;
+import javax.swing.JScrollPane;
 
 public class FrontFrame extends JFrame {
 
@@ -45,10 +46,6 @@ public class FrontFrame extends JFrame {
 		listV.add("Parham");
 		listV.add("Navid");
 		
-		JList list = new JList(listV);
-		list.setBounds(10, 58, 313, 192);
-		contentPane.add(list);
-		
 		JButton btnSelect = new JButton("Select");
 		btnSelect.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -58,5 +55,12 @@ public class FrontFrame extends JFrame {
 		});
 		btnSelect.setBounds(335, 58, 89, 192);
 		contentPane.add(btnSelect);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 58, 313, 192);
+		contentPane.add(scrollPane);
+		
+		JList list = new JList(listV);
+		scrollPane.setViewportView(list);
 	}
 }
