@@ -49,9 +49,6 @@ public class RecieveThread extends Thread {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-
 		}
-
 	}
-
 }

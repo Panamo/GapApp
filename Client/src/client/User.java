@@ -32,5 +32,4 @@ public class User {
 		out.println(text);
 		out.flush();
 	}
-
 }

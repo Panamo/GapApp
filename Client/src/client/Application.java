@@ -18,8 +18,6 @@ public class Application {
 		frame.setTitle(id);
 		frame.setVisible(true);
 		user1.setFrame(frame);
-		user1.setRecieve(new RecieveThread(user1));
-		
+		user1.setRecieve(new RecieveThread(user1));	
 	}
-
 }
