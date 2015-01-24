@@ -42,5 +42,4 @@ public class User {
 		out.println(verb + " " + destID + " " + size + "\n" + msg);
 		out.flush();
 	}
-
 }

@@ -27,10 +27,13 @@ public class Application {
 		frame.setTitle("GapApp");
 		frame.setVisible(true);
 		user1.setFrame(frame);
-		user1.setRecieve(new RecieveThread(user1));
-		
+		user1.setRecieve(new RecieveThread(user1));	
 	}
+<<<<<<< HEAD
 	
 	
 
 }
+=======
+}
+>>>>>>> da6058e423023250c4405b7628900516bb3aad51
