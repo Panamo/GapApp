@@ -30,11 +30,11 @@ public class Client extends User {
 		}
 	}
 
-	// public void sendToServer(Message msg, String ver) throws IOException{
-	// PrintWriter out = new PrintWriter(serverSocket.getOutputStream());
-	// int size = msg.getBytes().length;
-	// out.println(verb + " " + destID + " " + size + "\n" + msg);
-	// out.flush();
-	// }
+	 public static void sendToServer(Message msg, String ver) {// TODO Should be corrected and completed
+//	 PrintWriter out = new PrintWriter(serverSocket.getOutputStream());
+//	 int size = msg.getBytes().length;
+//	 out.println(verb + " " + destID + " " + size + "\n" + msg);
+//	 out.flush();
+	 }
 
 }

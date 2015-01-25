@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class RecieveThread extends Thread {
+public class RecieveThread extends Thread {// Question: Is one Thread enough? or we use one Thread for each chat?
 
 	private Client client;
 

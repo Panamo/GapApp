@@ -23,5 +23,8 @@ public class Chat {
 		this.name = name;
 	}
 	
-	
+	public void openFrame(){
+		frame = new ChatFrame(this);
+		frame.setVisible(true);
+	}
 }
