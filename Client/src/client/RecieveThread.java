@@ -6,18 +6,18 @@ import java.io.InputStreamReader;
 
 public class RecieveThread extends Thread {
 
-	private Client user;
+	private Client client;
 
 	public RecieveThread(Client user) {
-		this.user = user;
+		this.client = user;
 	}
 
 	public void run() {
-		BufferedReader in = null;
-
+		BufferedReader in;
+		
 		try {
 			in = new BufferedReader(new InputStreamReader(
-					user.serverSocket.getInputStream()));
+					client.serverSocket.getInputStream()));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -3,8 +3,10 @@ package client;
 import java.util.ArrayList;
 
 public class Chat { 
+	
 	private String ID;
 	private String name;
+	String isGroup;
 	ArrayList<Client> members;
 
 	private ChatFrame frame;

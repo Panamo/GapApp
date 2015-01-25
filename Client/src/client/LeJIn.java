@@ -10,6 +10,5 @@ public class LeJIn extends Command{ //TODO check chats and decide the verb
 		this.id = id;
 		this.chat = chat;
 
-		
 	}
 }

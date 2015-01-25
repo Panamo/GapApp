@@ -1,48 +1,40 @@
 package client;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 
-public class Client {
+public class Client extends User {
 	static int count = 0;
-	private FrontFrame frame = null;
+	private FrontFrame frame;
+	private ArrayList<Chat> chats = new ArrayList<Chat>();
+
 	public FrontFrame getFrame() {
 		return frame;
 	}
-	
-	private ArrayList<Chat> chats = new ArrayList<Chat>();
-	
+
 	public void setFrame(FrontFrame frame) {
 		this.frame = frame;
 	}
 
-	String ID = null;
-	private String publicUUID;
 	private String privateUUID;
-	Socket serverSocket = null;
-	RecieveThread recieve = null;
-	public void setRecieve(RecieveThread recieve) {
-		this.recieve = recieve;
-		this.recieve.start();
-	}
+	Socket serverSocket;
+	RecieveThread rt;
 
-	public Client(Socket serverSocket){
-		if (count == 0){
+	public Client(Socket serverSocket) {
+		if (count == 0) {
 			this.serverSocket = serverSocket;
-			//this.ID = ID;
+			rt = new RecieveThread(this);
+			rt.start();
+			// this.ID = ID;
 			count++;
 		}
 	}
-	
 
-	
-//	public void sendToServer(Message msg, String ver) throws IOException{
-//		PrintWriter out = new PrintWriter(serverSocket.getOutputStream());
-//		int size = msg.getBytes().length;
-//		out.println(verb + " " + destID + " " + size + "\n" + msg);
-//		out.flush();
-//	}
+	// public void sendToServer(Message msg, String ver) throws IOException{
+	// PrintWriter out = new PrintWriter(serverSocket.getOutputStream());
+	// int size = msg.getBytes().length;
+	// out.println(verb + " " + destID + " " + size + "\n" + msg);
+	// out.flush();
+	// }
 
 }
