@@ -21,7 +21,7 @@ public class FrontFrame extends JFrame {
 	private JTextField textField;
 
 
-	public FrontFrame(User user) {
+	public FrontFrame(Client user) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

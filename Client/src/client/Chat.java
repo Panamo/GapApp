@@ -1,8 +1,12 @@
 package client;
 
-public class Chat {
+import java.util.ArrayList;
+
+public class Chat { 
 	private String ID;
 	private String name;
+	ArrayList<Client> members;
+
 	private ChatFrame frame;
 	public String getID() {
 		return ID;

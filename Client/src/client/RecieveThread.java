@@ -6,9 +6,9 @@ import java.io.InputStreamReader;
 
 public class RecieveThread extends Thread {
 
-	private User user;
+	private Client user;
 
-	public RecieveThread(User user) {
+	public RecieveThread(Client user) {
 		this.user = user;
 	}
 
