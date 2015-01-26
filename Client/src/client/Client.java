@@ -4,6 +4,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 public class Client extends User {
+	
 	static int count = 0;
 	private FrontFrame frame;
 	private ArrayList<Chat> chats = new ArrayList<Chat>();
@@ -30,7 +31,7 @@ public class Client extends User {
 		}
 	}
 
-	 public static void sendToServer(Message msg, String ver) {// TODO Should be corrected and completed
+	 public static void sendToServer(Command cmd) {// TODO Should be corrected and completed
 //	 PrintWriter out = new PrintWriter(serverSocket.getOutputStream());
 //	 int size = msg.getBytes().length;
 //	 out.println(verb + " " + destID + " " + size + "\n" + msg);

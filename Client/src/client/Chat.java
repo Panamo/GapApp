@@ -2,7 +2,7 @@ package client;
 
 import java.util.ArrayList;
 
-public class Chat { 
+public class Chat { // TODO write message on file
 	
 	private String ID;
 	private String name;
@@ -39,11 +39,18 @@ public class Chat {
 		members.remove(user);
 	}
 	
+	boolean isMember(User user) {
+		
+		if (members.contains(user))
+			return true;
+		return false;
+	}
+	
 	void setIsGroup() {
 		
-		if (members.size() > 2) {
+		if (members.size() > 2)
 			isGroup = true;
-		} else {
+		else {
 			if (members.size() == 2)
 				isGroup = false;
 			else {

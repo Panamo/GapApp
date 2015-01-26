@@ -1,6 +1,6 @@
 package client;
 
-public class LeJIn extends Command{ //TODO check chats and decide the verb
+public class LeJIn extends Command {
 
 	User user;
 	Chat chat;
@@ -12,10 +12,17 @@ public class LeJIn extends Command{ //TODO check chats and decide the verb
 
 		if (sender.getID().equals(user.getID())) {
 			
+			if (chat.isMember(user))
+				verb = "leave";
+			else
+				verb = "join";
 			
+			Client.sendToServer(this);
 		} else {
-			
-			
+			if (!chat.isMember(user)) {
+				verb = "add";
+				Client.sendToServer(this);
+			}
 		}
 	}
 }

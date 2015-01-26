@@ -11,6 +11,7 @@ public class Message extends Command {
 		this.receiver = receiver;
 		this.data = data;
 		verb = "send";
+		Client.sendToServer(this);
 	}
 
 	private User getReceiver() {
