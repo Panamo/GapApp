@@ -1,20 +1,21 @@
 package client;
 
+import java.io.IOException;
+
 public class Message extends Command {
 
 	private User receiver;
 	private String data;
 	
-	public Message(User sender, User receiver, String data) {
+	public Message(Client sender, User receiver, String data) throws IOException {
 		
 		this.sender = sender;
 		this.receiver = receiver;
 		this.data = data;
-		verb = "send";
-		Client.sendToServer(this);
+		sender.sendToServer(this);
 	}
 
-	private User getReceiver() {
+	User getReceiver() {
 		return receiver;
 	}
 
@@ -22,7 +23,7 @@ public class Message extends Command {
 		this.receiver = receiver;
 	}
 
-	private String getData() {
+	String getData() {
 		return data;
 	}
 

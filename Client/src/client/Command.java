@@ -2,13 +2,13 @@ package client;
 
 public class Command {
 
-	User sender;
+	Client sender;
 	String verb;
 	
-	private User getSender() {
+	private Client getSender() {
 		return sender;
 	}
-	public void setSender(User sender) {
+	public void setSender(Client sender) {
 		this.sender = sender;
 	}
 	private String getVerb() {

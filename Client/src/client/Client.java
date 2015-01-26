@@ -1,10 +1,12 @@
 package client;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 
 public class Client extends User {
-	
+
 	static int count = 0;
 	private FrontFrame frame;
 	private ArrayList<Chat> chats = new ArrayList<Chat>();
@@ -26,16 +28,26 @@ public class Client extends User {
 			this.serverSocket = serverSocket;
 			rt = new RecieveThread(this);
 			rt.start();
-			// this.ID = ID;
 			count++;
 		}
 	}
 
-	 public static void sendToServer(Command cmd) {// TODO Should be corrected and completed
-//	 PrintWriter out = new PrintWriter(serverSocket.getOutputStream());
-//	 int size = msg.getBytes().length;
-//	 out.println(verb + " " + destID + " " + size + "\n" + msg);
-//	 out.flush();
-	 }
+	public void sendToServer(Command cmd) throws IOException {
+
+		String msg = "";
+
+		if (cmd.verb.equals("send")) {
+			msg = cmd.verb + " " + ((Message) cmd).getReceiver().getID() + " "
+					+ privateUUID + " "
+					+ ((Message) cmd).getData().getBytes().length + "\n"
+					+ ((Message) cmd).getData();
+		} else {
+			msg = cmd.verb + " " + ((LeJIn) cmd).getChat().getID() + " " + privateUUID + " 0";
+		}
+
+		 PrintWriter out = new PrintWriter(serverSocket.getOutputStream());
+		 out.println(msg);
+		 out.flush();
+	}
 
 }

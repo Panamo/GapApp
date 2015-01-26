@@ -2,9 +2,9 @@ package client;
 
 public class User {
 
-	private String name;
-	private String ID;
-	private String publicUUID;
+	String name;
+	String ID;
+	String publicUUID;
 	
 	String getName() {
 		return name;

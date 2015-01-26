@@ -1,12 +1,15 @@
 package client;
 
+import java.io.IOException;
+
 public class LeJIn extends Command {
 
-	User user;
-	Chat chat;
+	private User user;
+	private Chat chat;
 	
-	public LeJIn(User user, Chat chat) {
+	public LeJIn(User user, Chat chat, Client sender) throws IOException {
 		
+		this.sender = sender;
 		this.user = user;
 		this.chat = chat;
 
@@ -17,12 +20,28 @@ public class LeJIn extends Command {
 			else
 				verb = "join";
 			
-			Client.sendToServer(this);
+			sender.sendToServer(this);
 		} else {
 			if (!chat.isMember(user)) {
 				verb = "add";
-				Client.sendToServer(this);
+				sender.sendToServer(this);
 			}
 		}
+	}
+
+	protected User getUser() {
+		return user;
+	}
+
+	protected void setUser(User user) {
+		this.user = user;
+	}
+
+	protected Chat getChat() {
+		return chat;
+	}
+
+	protected void setChat(Chat chat) {
+		this.chat = chat;
 	}
 }
