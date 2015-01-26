@@ -36,18 +36,19 @@ public class Client extends User {
 
 		String msg = "";
 
-		if (cmd.verb.equals("send")) {
-			msg = cmd.verb + " " + ((Message) cmd).getReceiver().getID() + " "
-					+ privateUUID + " "
+		if (cmd.getVerb().equals("send")) {
+			msg = cmd.getVerb() + " " + ((Message) cmd).getReceiver().getID()
+					+ " " + privateUUID + " "
 					+ ((Message) cmd).getData().getBytes().length + "\n"
 					+ ((Message) cmd).getData();
 		} else {
-			msg = cmd.verb + " " + ((LeJIn) cmd).getChat().getID() + " " + privateUUID + " 0";
+			msg = cmd.getVerb() + " " + ((LeJIn) cmd).getChat().getID() + " "
+					+ ((LeJIn) cmd).getUser().getID() + " 0";
 		}
 
-		 PrintWriter out = new PrintWriter(serverSocket.getOutputStream());
-		 out.println(msg);
-		 out.flush();
+		PrintWriter out = new PrintWriter(serverSocket.getOutputStream());
+		out.println(msg);
+		out.flush();
 	}
 
 }

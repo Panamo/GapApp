@@ -9,21 +9,21 @@ public class LeJIn extends Command {
 	
 	public LeJIn(User user, Chat chat, Client sender) throws IOException {
 		
-		this.sender = sender;
+		setSender(sender);
 		this.user = user;
 		this.chat = chat;
 
 		if (sender.getID().equals(user.getID())) {
 			
 			if (chat.isMember(user))
-				verb = "leave";
+				setVerb("leave");
 			else
-				verb = "join";
+				setVerb("join");
 			
 			sender.sendToServer(this);
 		} else {
 			if (!chat.isMember(user)) {
-				verb = "add";
+				setVerb("add");
 				sender.sendToServer(this);
 			}
 		}
