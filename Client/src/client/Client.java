@@ -51,4 +51,11 @@ public class Client extends User {
 		out.flush();
 	}
 
+	void addToChat(Chat chat) {
+		chats.add(chat);
+	}
+	
+	ArrayList<Chat> getChats() {
+		return chats;
+	}
 }
