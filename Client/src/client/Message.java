@@ -9,10 +9,10 @@ public class Message extends Command {
 	
 	public Message(Client sender, User receiver, String data) throws IOException {
 		
-		this.sender = sender;
+		setSender(sender);
 		this.receiver = receiver;
 		this.data = data;
-		verb = "send";
+		setVerb("send");
 		sender.sendToServer(this);
 	}
 
