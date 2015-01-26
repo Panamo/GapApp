@@ -4,25 +4,23 @@ import java.io.IOException;
 
 public class LeJIn extends Command {
 
-	private User user;
-	private Chat chat;
+	private User toBeAdded;
 	
-	public LeJIn(User user, Chat chat, Client sender) throws IOException {
-		
+	
+	public LeJIn(User toBeAdded,Client sender,Chat dest) throws IOException {// here receiver is destination group
+		setReceiver(dest);
 		setSender(sender);
-		this.user = user;
-		this.chat = chat;
+		this.toBeAdded = toBeAdded;
 
-		if (sender.getID().equals(user.getID())) {
-			
-			if (chat.isMember(user))
+		if (sender.getID().equals(toBeAdded.getID())) {
+			if (dest.isMember(toBeAdded))
 				setVerb("leave");
 			else
 				setVerb("join");
 			
 			sender.sendToServer(this);
 		} else {
-			if (!chat.isMember(user)) {
+			if (!dest.isMember(toBeAdded)) {
 				setVerb("add");
 				sender.sendToServer(this);
 			}
@@ -30,18 +28,11 @@ public class LeJIn extends Command {
 	}
 
 	protected User getUser() {
-		return user;
+		return toBeAdded;
 	}
 
 	protected void setUser(User user) {
-		this.user = user;
+		this.toBeAdded = user;
 	}
 
-	protected Chat getChat() {
-		return chat;
-	}
-
-	protected void setChat(Chat chat) {
-		this.chat = chat;
-	}
 }

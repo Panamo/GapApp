@@ -4,14 +4,22 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
-public class Chat { // TODO write message on file
+public class Chat {
 	
 	private String ID;
 	private String name;
 	private boolean isGroup;
 	private ArrayList<User> members;
+	
+	public Chat(String ID, String name){
+		this.name = name;
+		this.ID = ID;
+		members = new ArrayList<User>();
+	}
 
-	private ChatFrame frame;
+	public ArrayList<User> getMembers() {
+		return members;
+	}
 	
 	public String getID() {
 		return ID;
@@ -26,13 +34,6 @@ public class Chat { // TODO write message on file
 		this.name = name;
 	}
 	
-	public void openFrame(){
-		frame = new ChatFrame(this);
-		frame.setVisible(true);
-	}
-	public ChatFrame getFrame(){
-		return frame;
-	}
 	
 	void addToMembers(User user) {
 		

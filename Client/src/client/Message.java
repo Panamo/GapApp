@@ -4,25 +4,16 @@ import java.io.IOException;
 
 public class Message extends Command {
 
-	private User receiver;
 	private String data;
 	
-	public Message(Client sender, User receiver, String data) throws IOException {
-		
+	public Message(Client sender, String data,Chat dest) throws IOException {
+		setReceiver(dest);
 		setSender(sender);
-		this.receiver = receiver;
 		this.data = data;
 		setVerb("send");
 		sender.sendToServer(this);
 	}
 
-	User getReceiver() {
-		return receiver;
-	}
-
-	public void setReceiver(User receiver) {
-		this.receiver = receiver;
-	}
 
 	String getData() {
 		return data;

@@ -20,6 +20,7 @@ public class FrontFrame extends JFrame {
 	public FrontFrame(Client user) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
+		setTitle(user.name);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -53,8 +54,7 @@ public class FrontFrame extends JFrame {
 		btnSelect.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int index = list.getSelectedIndex();
-				user.getChats().get(index).openFrame();
-				user.getChats().get(index).getFrame().setOpen();
+				user.openFrame(user.getChats().get(index));
 			}
 		});
 		btnSelect.setBounds(335, 58, 89, 192);

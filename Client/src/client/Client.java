@@ -19,7 +19,16 @@ public class Client extends User {
 		this.frame = frame;
 	}
 
-	private String privateUUID;
+	private String ID;
+	
+	public String getID() {
+		return ID;
+	}
+
+	public void setID(String iD) {
+		ID = iD;
+	}
+
 	Socket serverSocket;
 	RecieveThread rt;
 
@@ -37,12 +46,12 @@ public class Client extends User {
 		String msg = "";
 
 		if (cmd.getVerb().equals("send")) {
-			msg = cmd.getVerb() + " " + ((Message) cmd).getReceiver().getID()
-					+ " " + privateUUID + " "
+			msg = cmd.getVerb() + " " + cmd.getReceiver().getID()
+					+ " " + ID + " "
 					+ ((Message) cmd).getData().getBytes().length + "\n"
 					+ ((Message) cmd).getData();
 		} else {
-			msg = cmd.getVerb() + " " + ((LeJIn) cmd).getChat().getID() + " "
+			msg = cmd.getVerb() + " " + cmd.getReceiver().getID() + " "
 					+ ((LeJIn) cmd).getUser().getID() + " 0";
 		}
 
@@ -57,5 +66,13 @@ public class Client extends User {
 	
 	ArrayList<Chat> getChats() {
 		return chats;
+	}
+	
+	public void openFrame(Chat chat){
+		new ChatFrame(this,chat).setVisible(true);
+	}
+	public void openFront(){
+		frame=new FrontFrame(this);
+		frame.setVisible(true);
 	}
 }

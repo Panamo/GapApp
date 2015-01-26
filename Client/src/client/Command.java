@@ -4,7 +4,14 @@ public class Command {
 
 	private Client sender;
 	private String verb;
+	private Chat receiver; 
 	
+	public Chat getReceiver() {
+		return receiver;
+	}
+	public void setReceiver(Chat receiver) {
+		this.receiver = receiver;
+	}
 	Client getSender() {
 		return sender;
 	}
