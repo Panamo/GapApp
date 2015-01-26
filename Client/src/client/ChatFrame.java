@@ -16,8 +16,11 @@ import java.io.IOException;
 import javax.swing.JScrollPane;
 
 public class ChatFrame extends JFrame {
-	public boolean open = false;
+	private boolean open = false;
 	
+	public void setOpen(){
+		open=true;
+	}
 	private JPanel contentPane;
 	private JScrollPane scrollPane;
 

@@ -39,24 +39,27 @@ public class FrontFrame extends JFrame {
 		contentPane.add(btnSrch);
 
 		Vector<String> listV = new Vector<String>();
-		listV.add("Parham");
-		listV.add("Navid");
-
+		for(int i=0; i<user.getChats().size(); i++){
+			listV.add(user.getChats().get(i).getName());
+		}
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 58, 313, 192);
+		contentPane.add(scrollPane);
+		
+		JList<String> list = new JList<String>(listV);
+		scrollPane.setViewportView(list);
+		
 		JButton btnSelect = new JButton("Select");
 		btnSelect.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				// Open friend's ChatFrame:
-				// open=true;
+				int index = list.getSelectedIndex();
+				user.getChats().get(index).openFrame();
+				user.getChats().get(index).getFrame().setOpen();
 			}
 		});
 		btnSelect.setBounds(335, 58, 89, 192);
 		contentPane.add(btnSelect);
 
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 58, 313, 192);
-		contentPane.add(scrollPane);
-
-		JList list = new JList(listV);
-		scrollPane.setViewportView(list);
+		
 	}
 }

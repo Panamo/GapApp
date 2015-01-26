@@ -2,6 +2,8 @@ package client;
 
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
+
 public class Chat { // TODO write message on file
 	
 	private String ID;
@@ -27,6 +29,9 @@ public class Chat { // TODO write message on file
 	public void openFrame(){
 		frame = new ChatFrame(this);
 		frame.setVisible(true);
+	}
+	public ChatFrame getFrame(){
+		return frame;
 	}
 	
 	void addToMembers(User user) {
