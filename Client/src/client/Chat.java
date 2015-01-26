@@ -6,10 +6,11 @@ public class Chat {
 	
 	private String ID;
 	private String name;
-	String isGroup;
-	ArrayList<Client> members;
+	private boolean isGroup;
+	private ArrayList<User> members;
 
 	private ChatFrame frame;
+	
 	public String getID() {
 		return ID;
 	}
@@ -26,5 +27,32 @@ public class Chat {
 	public void openFrame(){
 		frame = new ChatFrame(this);
 		frame.setVisible(true);
+	}
+	
+	void addToMembers(User user) {
+		
+		members.add(user);
+	}
+	
+	void removeFromMembers(User user) {
+		
+		members.remove(user);
+	}
+	
+	void setIsGroup() {
+		
+		if (members.size() > 2) {
+			isGroup = true;
+		} else {
+			if (members.size() == 2)
+				isGroup = false;
+			else {
+				// TODO remove chat from asghar
+			}
+		}
+	}
+	
+	boolean getIsGroup() {
+		return isGroup;
 	}
 }

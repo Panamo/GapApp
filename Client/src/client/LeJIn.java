@@ -2,13 +2,20 @@ package client;
 
 public class LeJIn extends Command{ //TODO check chats and decide the verb
 
-	User id;
+	User user;
 	Chat chat;
 	
-	public LeJIn(User id, Chat chat) {
+	public LeJIn(User user, Chat chat) {
 		
-		this.id = id;
+		this.user = user;
 		this.chat = chat;
 
+		if (sender.getID().equals(user.getID())) {
+			
+			
+		} else {
+			
+			
+		}
 	}
 }
