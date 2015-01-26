@@ -12,6 +12,7 @@ public class Message extends Command {
 		this.sender = sender;
 		this.receiver = receiver;
 		this.data = data;
+		verb = "send";
 		sender.sendToServer(this);
 	}
 

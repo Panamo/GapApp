@@ -1,6 +1,7 @@
 package client;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -8,16 +9,20 @@ public class Test {
 
 	Client me;
 	User user;
-	
-	Test() throws UnknownHostException, IOException {
-		
-		me = new Client(new Socket("192.168.169.160", 1373));
-		
-		
-	}
-	
-	public static void main(String[] args) {
 
+	public static void main(String[] args) throws UnknownHostException, IOException {
+
+		String msg = "";
+		Socket serverSocket = new Socket("192.168.169.160", 1373);
+		PrintWriter out = new PrintWriter(serverSocket.getOutputStream());
+		
+		msg = "send" + " " + "hello!" + " "
+				+ "hi!!!!" + " "
+				+ "salam".getBytes().length + "\n"
+				+ "salam";
+		
+		out.println(msg);
+		out.flush();
 	}
 
 }
