@@ -19,22 +19,22 @@ public class ReceiveThread extends Thread {
 			in = new BufferedReader(new InputStreamReader(
 					client.serverSocket.getInputStream()));
 			while (true) {
-				
+
 				int number = 0;
 				String firstLine = in.readLine();
 				String[] fLH = firstLine.split(" ");
 				number = Integer.valueOf(fLH[3]);
-				char[] charArr = new char[number]; 
-				
+				char[] charArr = new char[number];
+
 				in.read(charArr, 0, number);
-				
+
 				String body = new String(charArr);
-				
+
 				client.listener(firstLine, body);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 }

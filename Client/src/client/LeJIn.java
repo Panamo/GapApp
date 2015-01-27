@@ -5,9 +5,12 @@ import java.io.IOException;
 public class LeJIn extends Command {
 
 	private User toBeAdded;
-	
-	
-	public LeJIn(User toBeAdded,Client sender,Chat dest) throws IOException {// here receiver is destination group
+
+	public LeJIn(User toBeAdded, Client sender, Chat dest) throws IOException { // here
+																				// receiver
+																				// is
+																				// destination
+																				// group
 		setReceiver(dest);
 		setSender(sender);
 		this.toBeAdded = toBeAdded;
@@ -17,7 +20,7 @@ public class LeJIn extends Command {
 				setVerb("leave");
 			else
 				setVerb("join");
-			
+
 			sender.sendToServer(this);
 		} else {
 			if (!dest.isMember(toBeAdded)) {

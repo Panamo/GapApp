@@ -2,29 +2,38 @@ package client;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Chat {
-
+	
+	boolean frameIsOpen = false;
+	int isThereNew = 0;
+	ChatFrame frame;
 	private String iD;
 	private String name;
 	private boolean isGroup;
-	private ArrayList<User> members;
+	//private ArrayList<User> members;
+	private HashMap<String, User> membMap;
 	private ArrayList<Message> messages;
 
 	public Chat(String ID, String name) {
 		this.name = name;
 		this.iD = ID;
-		members = new ArrayList<User>();
+		//members = new ArrayList<User>();
+		membMap = new HashMap<>();
 	}
 
-	public ArrayList<User> getMembers() {
-		return members;
+	public HashMap<String, User> getMembers() {
+		return membMap;
+	}
+	
+	public ArrayList<User> getMembersList(){
+		return new ArrayList<User>(membMap.values());
 	}
 
 	public String getID() {
@@ -45,30 +54,32 @@ public class Chat {
 
 	void addToMembers(User user) {
 
-		members.add(user);
+		//members.add(user);
+		membMap.put(user.getID(), user);
 	}
 
 	void removeFromMembers(User user) {
 
-		members.remove(user);
+		//members.remove(user);
+		membMap.replace(user.getID(), user);
 	}
 
 	boolean isMember(User user) {
-
-		if (members.contains(user))
+		
+		if (membMap.containsValue(user))
 			return true;
 		return false;
 	}
 
 	void setIsGroup() {
 
-		if (members.size() > 2)
+		if (membMap.size() > 2)
 			isGroup = true;
 		else {
-			if (members.size() == 2)
+			if (membMap.size() == 2)
 				isGroup = false;
 			else {
-				// TODO remove chat from asghar
+				
 			}
 		}
 	}
@@ -78,26 +89,45 @@ public class Chat {
 	}
 
 	void writeMessageInFile(String senderID, String msg) throws IOException {
-
 		File file = new File(iD);
 
 		PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(
 				file, true)));
 
-		String s = "{\n" + senderID + "\n" + msg + "\n}";
+		String newMsg = "{\n" + senderID + "\n" + msg + "\n}";
 
-		pw.println(s);
+		pw.println(newMsg);
 		pw.flush();
-		
+		pw.close();
 		messages.add(new Message(senderID, msg));
 		
-		//TODO view new message in frame (Chapal work)
+		if(frameIsOpen){
+			frame.refresh(senderID, msg, this);
+		}
+		else{
+			isThereNew++;
+		}
+		
 	}
 
-	void readFile() throws FileNotFoundException {
+	public int getIsThereNew() {
+		return isThereNew;
+	}
+
+	public void setIsThereNew(int isThereNew) {
+		this.isThereNew = isThereNew;
+	}
+
+	public ArrayList<Message> getMessages() {
+		return messages;
+	}
+
+	void readFile() throws IOException {
 		
 		File file = new File(iD);
-		
+		if (!file.exists()){
+			file.createNewFile();
+		}
 		Scanner sc = new Scanner(file);
 		messages = new ArrayList<Message>();
 		
@@ -114,5 +144,6 @@ public class Chat {
 				messages.add(new Message(senderID, msg));
 			}
 		}
+		sc.close();
 	}
 }

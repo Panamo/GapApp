@@ -1,9 +1,11 @@
 package client;
 
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Client extends User {
 
@@ -12,8 +14,11 @@ public class Client extends User {
 	Socket serverSocket;
 	private String ID;
 	ReceiveThread rt;
-	private ArrayList<Chat> chats = new ArrayList<Chat>();
-
+	//private ArrayList<Chat> chats = new ArrayList<Chat>();
+	
+	// My test{
+	HashMap<String, Chat> chatMap = new HashMap<>();
+	// }
 	public FrontFrame getFrame() {
 		return frame;
 	}
@@ -38,17 +43,26 @@ public class Client extends User {
 			count++;
 		}
 	}
-
 	void addToChat(Chat chat) {
-		chats.add(chat);
+		//chats.add(chat);
+		// My test{
+		chatMap.put(chat.getID(), chat);
+		// }
 	}
 
-	ArrayList<Chat> getChats() {
-		return chats;
+	HashMap<String, Chat> getChats() {
+		return chatMap;
 	}
-
-	public void openFrame(Chat chat) {
-		new ChatFrame(this, chat).setVisible(true);
+	
+	ArrayList<Chat> getChatList(){
+		return new ArrayList<Chat>(chatMap.values());
+	}
+	
+	
+	public void openFrame(Chat chat) throws IOException {
+		chat.frame = new ChatFrame(this, chat);
+		chat.frame.setVisible(true);
+		chat.frameIsOpen = true;
 	}
 
 	public void openFront() {
@@ -62,11 +76,13 @@ public class Client extends User {
 
 		if (cmd.getVerb().equals("send")) {
 			msg = cmd.getVerb() + " " + cmd.getReceiver().getID() + " " + ID
-					+ " " + ((MessageCmd) cmd).getData().getBytes().length + "\n"
-					+ ((MessageCmd) cmd).getData();
+					+ " " + ((MessageCmd) cmd).getData().getBytes().length
+					+ "\n" + ((MessageCmd) cmd).getData();
 		} else {
 			msg = cmd.getVerb() + " " + cmd.getReceiver().getID() + " "
-					+ ((LeJIn) cmd).getUser().getID() + " 0"; // TODO send senderID to server
+					+ ((LeJIn) cmd).getUser().getID() + " 0"; // TODO send
+																// senderID to
+																// server
 		}
 
 		PrintWriter out = new PrintWriter(serverSocket.getOutputStream());
@@ -75,29 +91,33 @@ public class Client extends User {
 	}
 
 	void listener(String firstLine, String body) throws IOException {
-	
+
 		String[] fLH = firstLine.split(" ");
-		
+
 		if (fLH[0].equals("message")) {
-			
+
 			String senderID = fLH[1];
 			String chatID = fLH[2];
 
-			for (int i = 0; i < chats.size(); i++) {
-				if (chats.get(i).getID().equals(chatID)) {
-					chats.get(i).writeMessageInFile(senderID, body);
+			for (int i = 0; i < chatMap.size(); i++) {
+				if (chatMap.get(i).getID().equals(chatID)) {
+					chatMap.get(i).writeMessageInFile(senderID, body);
 					break;
 				}
 			}
+			
+			// My test{
+			chatMap.get(chatID).writeMessageInFile(senderID, body);
+			// }
 		} else {
 			if (fLH[0].equals("invite")) {
-				
+
 				String senderID = fLH[1];
 				String chatID = fLH[2];
-				
+
 				// TODO
-			} else if(fLH[0].equals("deliver")) {
-				
+			} else if (fLH[0].equals("deliver")) {
+
 			}
 		}
 	}

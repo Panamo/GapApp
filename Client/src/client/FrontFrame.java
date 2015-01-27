@@ -1,7 +1,11 @@
 package client;
 
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.JButton;
@@ -40,8 +44,8 @@ public class FrontFrame extends JFrame {
 		contentPane.add(btnSrch);
 
 		Vector<String> listV = new Vector<String>();
-		for(int i=0; i<user.getChats().size(); i++){
-			listV.add(user.getChats().get(i).getName());
+		for(int i=0; i<user.getChatList().size(); i++){
+			listV.add(user.getChatList().get(i).getName());
 		}
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 58, 313, 192);
@@ -54,7 +58,12 @@ public class FrontFrame extends JFrame {
 		btnSelect.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int index = list.getSelectedIndex();
-				user.openFrame(user.getChats().get(index));
+				try {
+					user.openFrame(user.getChatList().get(index));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		btnSelect.setBounds(335, 58, 89, 192);
