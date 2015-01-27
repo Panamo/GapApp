@@ -7,8 +7,11 @@ import java.util.ArrayList;
 
 public class Client extends User {
 
-	static int count = 0;
 	private FrontFrame frame;
+	static int count = 0;
+	Socket serverSocket;
+	private String ID;
+	RecieveThread rt;
 	private ArrayList<Chat> chats = new ArrayList<Chat>();
 
 	public FrontFrame getFrame() {
@@ -19,8 +22,6 @@ public class Client extends User {
 		this.frame = frame;
 	}
 
-	private String ID;
-	
 	public String getID() {
 		return ID;
 	}
@@ -28,9 +29,6 @@ public class Client extends User {
 	public void setID(String iD) {
 		ID = iD;
 	}
-
-	Socket serverSocket;
-	RecieveThread rt;
 
 	public Client(Socket serverSocket) {
 		if (count == 0) {
@@ -41,18 +39,34 @@ public class Client extends User {
 		}
 	}
 
+	void addToChat(Chat chat) {
+		chats.add(chat);
+	}
+
+	ArrayList<Chat> getChats() {
+		return chats;
+	}
+
+	public void openFrame(Chat chat) {
+		new ChatFrame(this, chat).setVisible(true);
+	}
+
+	public void openFront() {
+		frame = new FrontFrame(this);
+		frame.setVisible(true);
+	}
+
 	public void sendToServer(Command cmd) throws IOException {
 
 		String msg = "";
 
 		if (cmd.getVerb().equals("send")) {
-			msg = cmd.getVerb() + " " + cmd.getReceiver().getID()
-					+ " " + ID + " "
-					+ ((Message) cmd).getData().getBytes().length + "\n"
+			msg = cmd.getVerb() + " " + cmd.getReceiver().getID() + " " + ID
+					+ " " + ((Message) cmd).getData().getBytes().length + "\n"
 					+ ((Message) cmd).getData();
 		} else {
 			msg = cmd.getVerb() + " " + cmd.getReceiver().getID() + " "
-					+ ((LeJIn) cmd).getUser().getID() + " 0";
+					+ ((LeJIn) cmd).getUser().getID() + " 0"; // TODO send senderID to server
 		}
 
 		PrintWriter out = new PrintWriter(serverSocket.getOutputStream());
@@ -60,19 +74,24 @@ public class Client extends User {
 		out.flush();
 	}
 
-	void addToChat(Chat chat) {
-		chats.add(chat);
-	}
+	void listener(String firstLine, String body) {
 	
-	ArrayList<Chat> getChats() {
-		return chats;
-	}
-	
-	public void openFrame(Chat chat){
-		new ChatFrame(this,chat).setVisible(true);
-	}
-	public void openFront(){
-		frame=new FrontFrame(this);
-		frame.setVisible(true);
+		String[] fLH = firstLine.split(" ");
+		
+		if (fLH[0].equals("message")) {
+			
+			int senderID = Integer.valueOf(fLH[1]);
+			int chatID = Integer.valueOf(fLH[2]);
+			
+			
+		} else {
+			if (fLH[0].equals("invite")) {
+				
+				int senderID = Integer.valueOf(fLH[1]);
+				int chatID = Integer.valueOf(fLH[2]);
+			} else if(fLH[0].equals("deliver")) {
+				
+			}
+		}
 	}
 }

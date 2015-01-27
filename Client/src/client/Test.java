@@ -13,7 +13,7 @@ public class Test {
 	public static void main(String[] args) throws UnknownHostException, IOException {
 
 		String msg = "";
-		Socket serverSocket = new Socket("192.168.169.160", 1373);
+		Socket serverSocket = new Socket("192.168.169.128", 1373);
 		PrintWriter out = new PrintWriter(serverSocket.getOutputStream());
 		
 		msg = "send" + " " + "hello!" + " "

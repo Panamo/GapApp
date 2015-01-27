@@ -1,59 +1,62 @@
 package client;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
+public class Chat { // TODO
 
-public class Chat {
-	
-	private String ID;
+	private String iD;
 	private String name;
 	private boolean isGroup;
 	private ArrayList<User> members;
-	
-	public Chat(String ID, String name){
+
+	public Chat(String ID, String name) {
 		this.name = name;
-		this.ID = ID;
+		this.iD = ID;
 		members = new ArrayList<User>();
 	}
 
 	public ArrayList<User> getMembers() {
 		return members;
 	}
-	
+
 	public String getID() {
-		return ID;
+		return iD;
 	}
+
 	public void setID(String iD) {
-		ID = iD;
+		this.iD = iD;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
+
 	void addToMembers(User user) {
-		
+
 		members.add(user);
 	}
-	
+
 	void removeFromMembers(User user) {
-		
+
 		members.remove(user);
 	}
-	
+
 	boolean isMember(User user) {
-		
+
 		if (members.contains(user))
 			return true;
 		return false;
 	}
-	
+
 	void setIsGroup() {
-		
+
 		if (members.size() > 2)
 			isGroup = true;
 		else {
@@ -64,8 +67,25 @@ public class Chat {
 			}
 		}
 	}
-	
+
 	boolean getIsGroup() {
 		return isGroup;
+	}
+
+	void writeMessageInFile(String senderID, String msg)
+			throws FileNotFoundException {
+
+		File file = new File(iD);
+
+		PrintWriter pw = new PrintWriter(file);
+
+		String s = "{\n" + senderID + "\n" + msg + "\n}";
+
+		pw.println(s);
+		pw.flush();
+	}
+
+	void readFile() {
+
 	}
 }

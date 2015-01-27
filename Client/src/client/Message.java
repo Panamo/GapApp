@@ -14,7 +14,6 @@ public class Message extends Command {
 		sender.sendToServer(this);
 	}
 
-
 	String getData() {
 		return data;
 	}
