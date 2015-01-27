@@ -8,3 +8,4 @@ This project is written in java.
 Go to src folder and execute following command
 
 	$ javac *.java
+	$ jar cfve Client.jar *.class
