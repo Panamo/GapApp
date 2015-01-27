@@ -4,11 +4,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class RecieveThread extends Thread {
+public class ReceiveThread extends Thread {
 
 	private Client client;
 
-	public RecieveThread(Client user) {
+	public ReceiveThread(Client user) {
 		this.client = user;
 	}
 

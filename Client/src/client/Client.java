@@ -11,7 +11,7 @@ public class Client extends User {
 	static int count = 0;
 	Socket serverSocket;
 	private String ID;
-	RecieveThread rt;
+	ReceiveThread rt;
 	private ArrayList<Chat> chats = new ArrayList<Chat>();
 
 	public FrontFrame getFrame() {
@@ -33,7 +33,7 @@ public class Client extends User {
 	public Client(Socket serverSocket) {
 		if (count == 0) {
 			this.serverSocket = serverSocket;
-			rt = new RecieveThread(this);
+			rt = new ReceiveThread(this);
 			rt.start();
 			count++;
 		}
@@ -62,8 +62,8 @@ public class Client extends User {
 
 		if (cmd.getVerb().equals("send")) {
 			msg = cmd.getVerb() + " " + cmd.getReceiver().getID() + " " + ID
-					+ " " + ((Message) cmd).getData().getBytes().length + "\n"
-					+ ((Message) cmd).getData();
+					+ " " + ((MessageCmd) cmd).getData().getBytes().length + "\n"
+					+ ((MessageCmd) cmd).getData();
 		} else {
 			msg = cmd.getVerb() + " " + cmd.getReceiver().getID() + " "
 					+ ((LeJIn) cmd).getUser().getID() + " 0"; // TODO send senderID to server
@@ -74,21 +74,28 @@ public class Client extends User {
 		out.flush();
 	}
 
-	void listener(String firstLine, String body) {
+	void listener(String firstLine, String body) throws IOException {
 	
 		String[] fLH = firstLine.split(" ");
 		
 		if (fLH[0].equals("message")) {
 			
-			int senderID = Integer.valueOf(fLH[1]);
-			int chatID = Integer.valueOf(fLH[2]);
-			
-			
+			String senderID = fLH[1];
+			String chatID = fLH[2];
+
+			for (int i = 0; i < chats.size(); i++) {
+				if (chats.get(i).getID().equals(chatID)) {
+					chats.get(i).writeMessageInFile(senderID, body);
+					break;
+				}
+			}
 		} else {
 			if (fLH[0].equals("invite")) {
 				
-				int senderID = Integer.valueOf(fLH[1]);
-				int chatID = Integer.valueOf(fLH[2]);
+				String senderID = fLH[1];
+				String chatID = fLH[2];
+				
+				// TODO
 			} else if(fLH[0].equals("deliver")) {
 				
 			}

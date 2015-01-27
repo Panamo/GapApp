@@ -55,7 +55,7 @@ public class ChatFrame extends JFrame {
 				editorPane.setText("");
 				textPane.setText(textPane.getText() + "ME: " + text + "\n");
 				try {
-					new Message(sender, text, chat);
+					new MessageCmd(sender, text, chat);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

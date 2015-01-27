@@ -1,24 +1,21 @@
 package client;
 
-import java.io.IOException;
+public class Message {
 
-public class Message extends Command {
-
-	private String data;
+	String senderID;
+	String msg;
 	
-	public Message(Client sender, String data,Chat dest) throws IOException {
-		setReceiver(dest);
-		setSender(sender);
-		this.data = data;
-		setVerb("send");
-		sender.sendToServer(this);
+	Message(String senderID, String msg) {
+		
+		this.senderID = senderID;
+		this.msg = msg;
 	}
 
-	String getData() {
-		return data;
+	protected String getSenderID() {
+		return senderID;
 	}
 
-	public void setData(String data) {
-		this.data = data;
+	protected String getMsg() {
+		return msg;
 	}
 }
