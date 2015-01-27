@@ -88,6 +88,10 @@ public class Chat {
 
 		pw.println(s);
 		pw.flush();
+		
+		messages.add(new Message(senderID, msg));
+		
+		//TODO view new message in frame (Chapal work)
 	}
 
 	void readFile() throws FileNotFoundException {
