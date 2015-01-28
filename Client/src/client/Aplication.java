@@ -8,9 +8,9 @@ public class Aplication {
 	
 	public static void main(String[] args) throws UnknownHostException, IOException {
 		
-		Client me = new Client("navid", "msk", new Socket("192.168.169.199", 1373));
+		Client me = new Client("mrma95", "chapal", new Socket("192.168.169.199", 1373));
 		me.signIn("pass");
-		User user = new User("mrma95", "chapal");
+		User user = new User("navid", "msk");
 		Chat chat = new Chat(user.getID(), user.getName());
 		me.addToChat(chat);
 		chat.addToMembers(user);

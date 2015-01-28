@@ -58,7 +58,7 @@ public class ChatFrame extends JFrame {
 		contentPane.add(scrollPane);
 
 		textPane = new JTextPane();
-		textPane.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		textPane.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		textPane.setEditable(false);
 		scrollPane.setViewportView(textPane);
 		

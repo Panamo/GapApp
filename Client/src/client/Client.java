@@ -15,7 +15,7 @@ public class Client extends User {
 	ReceiveThread rt;
 
 	HashMap<String, Chat> chatMap = new HashMap<>();
-	
+
 	Client(String name, String ID, Socket serverSocket) {
 		super(name, ID);
 		if (count == 0) {
@@ -26,23 +26,23 @@ public class Client extends User {
 			count++;
 		}
 	}
-	
+
 	void signIn(String pass) throws IOException {
 		signIn = true;
-		
+
 		SignIn si = new SignIn(pass, this);
 		sendToServer(si);
 	}
-	
+
 	void signOut() {
 		signIn = false;
 		// TODO
 	}
-	
+
 	boolean getSignIn() {
 		return signIn;
 	}
-	
+
 	public FrontFrame getFrame() {
 		return frame;
 	}
@@ -92,7 +92,8 @@ public class Client extends User {
 					+ "\n" + ((MessageCmd) cmd).getData();
 		} else {
 			if (cmd.getVerb().equals("signin")) {
-				msg = cmd.getVerb() + " " + cmd.getSender().getID() + " " + ((SignIn) cmd).getPass() + " 0\n";
+				msg = cmd.getVerb() + " " + cmd.getSender().getID() + " "
+						+ ((SignIn) cmd).getPass() + " 0\n";
 			} else {
 				msg = cmd.getVerb() + " " + cmd.getReceiver().getID() + " "
 						+ ((LeJIn) cmd).getUser().getID() + " 0"; // TODO send
@@ -107,7 +108,10 @@ public class Client extends User {
 		out.flush();
 	}
 
-	void listener(String firstLine, String body) throws IOException { // TODO handle close verb
+	void listener(String firstLine, String body) throws IOException { // TODO
+																		// handle
+																		// close
+																		// verb
 
 		String[] fLH = firstLine.split(" ");
 
@@ -116,7 +120,11 @@ public class Client extends User {
 			String chatID = fLH[1];
 			String senderID = fLH[2];
 
-			chatMap.get(chatID).writeMessageInFile(senderID, body);
+			if (chatMap.get(chatID) == null) {
+				if (!(chatMap.get(senderID) == null))
+					chatMap.get(senderID).writeMessageInFile(senderID, body);
+			} else
+				chatMap.get(chatID).writeMessageInFile(senderID, body);
 
 		} else {
 			if (fLH[0].equals("invite")) {
