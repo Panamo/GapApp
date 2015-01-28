@@ -9,6 +9,8 @@ import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 import javax.swing.JScrollPane;
@@ -34,6 +36,17 @@ public class ChatFrame extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                System.out.println(chat.getName() + " frame closed!!");
+            	chat.setFrameIsOpen (false);
+                //e.getWindow().dispose();
+            }
+        });
 
 		JEditorPane editorPane = new JEditorPane();
 		editorPane.setFont(new Font("Trebuchet MS", Font.PLAIN, 11));
@@ -126,7 +139,7 @@ public class ChatFrame extends JFrame {
 		String toBeShowed = "";
 		for (User u : chat.getMembers().values()) {
 			if (u.getID().equals(senderId)) {
-				toBeShowed = toBeShowed.concat(u.getName()).concat(": ").concat(msg);
+				toBeShowed = toBeShowed.concat(u.getName()).concat(": ").concat(msg).concat("\n");
 				textPane.setText(textPane.getText() + toBeShowed);
 				break;
 			}

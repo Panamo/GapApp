@@ -1,6 +1,5 @@
 package client;
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -14,10 +13,11 @@ public class Client extends User {
 	Socket serverSocket;
 	private String ID;
 	ReceiveThread rt;
-	//private ArrayList<Chat> chats = new ArrayList<Chat>();
-	
+	// private ArrayList<Chat> chats = new ArrayList<Chat>();
+
 	// My test{
 	HashMap<String, Chat> chatMap = new HashMap<>();
+
 	// }
 	public FrontFrame getFrame() {
 		return frame;
@@ -43,8 +43,9 @@ public class Client extends User {
 			count++;
 		}
 	}
+
 	void addToChat(Chat chat) {
-		//chats.add(chat);
+		// chats.add(chat);
 		// My test{
 		chatMap.put(chat.getID(), chat);
 		// }
@@ -53,16 +54,15 @@ public class Client extends User {
 	HashMap<String, Chat> getChats() {
 		return chatMap;
 	}
-	
-	ArrayList<Chat> getChatList(){
+
+	ArrayList<Chat> getChatList() {
 		return new ArrayList<Chat>(chatMap.values());
 	}
-	
-	
+
 	public void openFrame(Chat chat) throws IOException {
 		chat.frame = new ChatFrame(this, chat);
 		chat.frame.setVisible(true);
-		chat.frameIsOpen = true;
+		chat.setFrameIsOpen(true);
 	}
 
 	public void openFront() {
@@ -99,19 +99,10 @@ public class Client extends User {
 			String senderID = fLH[1];
 			String chatID = fLH[2];
 
-			for (int i = 0; i < chatMap.size(); i++) {
-				if (chatMap.get(i).getID().equals(chatID)) {
-					chatMap.get(i).writeMessageInFile(senderID, body);
-					break;
-				}
-			}
-			
-			// My test{
 			chatMap.get(chatID).writeMessageInFile(senderID, body);
-			// }
+
 		} else {
 			if (fLH[0].equals("invite")) {
-
 				String senderID = fLH[1];
 				String chatID = fLH[2];
 

@@ -10,29 +10,37 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Chat {
-	
-	boolean frameIsOpen = false;
+
+	private boolean frameIsOpen = false;
 	int isThereNew = 0;
 	ChatFrame frame;
 	private String iD;
 	private String name;
 	private boolean isGroup;
-	//private ArrayList<User> members;
+	// private ArrayList<User> members;
 	private HashMap<String, User> membMap;
 	private ArrayList<Message> messages;
 
 	public Chat(String ID, String name) {
 		this.name = name;
 		this.iD = ID;
-		//members = new ArrayList<User>();
+		// members = new ArrayList<User>();
 		membMap = new HashMap<>();
+	}
+
+	public boolean isFrameIsOpen() {
+		return frameIsOpen;
+	}
+
+	public void setFrameIsOpen(boolean frameIsOpen) {
+		this.frameIsOpen = frameIsOpen;
 	}
 
 	public HashMap<String, User> getMembers() {
 		return membMap;
 	}
-	
-	public ArrayList<User> getMembersList(){
+
+	public ArrayList<User> getMembersList() {
 		return new ArrayList<User>(membMap.values());
 	}
 
@@ -54,18 +62,18 @@ public class Chat {
 
 	void addToMembers(User user) {
 
-		//members.add(user);
+		// members.add(user);
 		membMap.put(user.getID(), user);
 	}
 
 	void removeFromMembers(User user) {
 
-		//members.remove(user);
+		// members.remove(user);
 		membMap.replace(user.getID(), user);
 	}
 
 	boolean isMember(User user) {
-		
+
 		if (membMap.containsValue(user))
 			return true;
 		return false;
@@ -79,7 +87,7 @@ public class Chat {
 			if (membMap.size() == 2)
 				isGroup = false;
 			else {
-				
+
 			}
 		}
 	}
@@ -100,14 +108,13 @@ public class Chat {
 		pw.flush();
 		pw.close();
 		messages.add(new Message(senderID, msg));
-		
-		if(frameIsOpen){
+
+		if (frameIsOpen) {
 			frame.refresh(senderID, msg, this);
-		}
-		else{
+		} else {
 			isThereNew++;
 		}
-		
+
 	}
 
 	public int getIsThereNew() {
@@ -123,16 +130,16 @@ public class Chat {
 	}
 
 	void readFile() throws IOException {
-		
+
 		File file = new File(iD);
-		if (!file.exists()){
+		if (!file.exists()) {
 			file.createNewFile();
 		}
 		Scanner sc = new Scanner(file);
 		messages = new ArrayList<Message>();
-		
+
 		while (sc.hasNext()) {
-			
+
 			if (sc.nextLine().equals("{")) {
 				String senderID = sc.nextLine();
 				String msg = "";
