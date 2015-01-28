@@ -81,7 +81,7 @@ public class Client extends User {
 		} else {
 			if (cmd.getVerb().equals("signin")) {
 
-				msg = cmd.getVerb() + " capac " + cmd.getSender().getID() + " "
+				msg = cmd.getVerb() + " " + cmd.getSender().getID() + " capac "
 						+ ((SignIn) cmd).getPass().getBytes().length + "\n"
 						+ ((SignIn) cmd).getPass();
 			} else {
@@ -102,7 +102,7 @@ public class Client extends User {
 
 		String[] fLH = firstLine.split(" ");
 
-		if (fLH[0].equals("message")) {
+		if (fLH[0].equals("send")) {
 
 			String senderID = fLH[1];
 			String chatID = fLH[2];

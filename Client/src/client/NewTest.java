@@ -16,7 +16,8 @@ public class NewTest {
 		User user = new User();
 		user.setID("chapal");
 		user.setName("mrma95");
-		Chat chat = new Chat("group", "group");
+		Chat chat = new Chat(user.getID(), user.getName());
+//		Chat chat = new Chat("group", "group");
 		me.addToChat(chat);
 		chat.addToMembers(user);
 		chat.addToMembers(me);
