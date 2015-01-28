@@ -7,7 +7,7 @@ public class SignIn extends Command {
 	String pass;
 	
 	SignIn(String pass, Client client) throws IOException {
-		if (client.getSihnIn()) {
+		if (client.getSignIn()) {
 			setVerb("signin");
 		} else {
 			setVerb("signout");

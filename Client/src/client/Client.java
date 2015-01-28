@@ -27,19 +27,19 @@ public class Client extends User {
 		}
 	}
 	
-	void SignIn(String pass) throws IOException {
+	void signIn(String pass) throws IOException {
 		signIn = true;
 		
 		SignIn si = new SignIn(pass, this);
 		sendToServer(si);
 	}
 	
-	void SignOut() {
+	void signOut() {
 		signIn = false;
 		// TODO
 	}
 	
-	boolean getSihnIn() {
+	boolean getSignIn() {
 		return signIn;
 	}
 	
