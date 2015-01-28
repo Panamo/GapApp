@@ -1,13 +1,21 @@
 package client;
 
-public class SignIn extends Command {
+import java.io.IOException;
 
+public class SignIn extends Command {
+	
 	String pass;
 	
-	SignIn(String pass, Client client) {
-		setVerb("signin");	
-		setSender(client);
+	SignIn(String pass, Client client) throws IOException {
+		if (client.getSihnIn()) {
+			setVerb("signin");
+			client.SignIn(pass);
+		} else {
+			setVerb("signout");
+			client.SignOut();
+		}
 		this.pass = pass;
+		setSender(client);
 	}
 	
 	String getPass() {

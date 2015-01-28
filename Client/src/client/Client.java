@@ -11,9 +11,38 @@ public class Client extends User {
 	private FrontFrame frame;
 	static int count = 0;
 	Socket serverSocket;
+	private boolean signIn;
 	ReceiveThread rt;
 
 	HashMap<String, Chat> chatMap = new HashMap<>();
+	
+	Client(String name, String ID, Socket serverSocket) {
+		super(name, ID);
+		if (count == 0) {
+			this.serverSocket = serverSocket;
+			rt = new ReceiveThread(this);
+			rt.start();
+			signIn = false;
+			count++;
+		}
+	}
+	
+	void SignIn(String pass) throws IOException {
+		signIn = true;
+		
+		// TODO
+		SignIn si = new SignIn(pass, this);
+		sendToServer(si);
+	}
+	
+	void SignOut() {
+		signIn = false;
+		// TODO
+	}
+	
+	boolean getSihnIn() {
+		return signIn;
+	}
 	
 	public FrontFrame getFrame() {
 		return frame;
@@ -29,16 +58,6 @@ public class Client extends User {
 
 	public void setID(String iD) {
 		ID = iD;
-	}
-	
-	Client(String name, String ID, Socket serverSocket) {
-		super(name, ID);
-		if (count == 0) {
-			this.serverSocket = serverSocket;
-			rt = new ReceiveThread(this);
-			rt.start();
-			count++;
-		}
 	}
 
 	void addToChat(Chat chat) {
