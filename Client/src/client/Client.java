@@ -11,14 +11,10 @@ public class Client extends User {
 	private FrontFrame frame;
 	static int count = 0;
 	Socket serverSocket;
-	private String ID;
 	ReceiveThread rt;
-	// private ArrayList<Chat> chats = new ArrayList<Chat>();
 
-	// My test{
 	HashMap<String, Chat> chatMap = new HashMap<>();
-
-	// }
+	
 	public FrontFrame getFrame() {
 		return frame;
 	}
@@ -34,8 +30,9 @@ public class Client extends User {
 	public void setID(String iD) {
 		ID = iD;
 	}
-
-	public Client(Socket serverSocket) {
+	
+	Client(String name, String ID, Socket serverSocket) {
+		super(name, ID);
 		if (count == 0) {
 			this.serverSocket = serverSocket;
 			rt = new ReceiveThread(this);
@@ -45,10 +42,7 @@ public class Client extends User {
 	}
 
 	void addToChat(Chat chat) {
-		// chats.add(chat);
-		// My test{
 		chatMap.put(chat.getID(), chat);
-		// }
 	}
 
 	HashMap<String, Chat> getChats() {

@@ -4,7 +4,12 @@ public class User {
 
 	String name;
 	String ID;
-	String publicUUID;
+	
+	User(String name, String ID) {
+	
+		this.name = name;
+		this.ID = ID;
+	}
 	
 	String getName() {
 		return name;
@@ -14,14 +19,5 @@ public class User {
 	}
 	String getID() {
 		return ID;
-	}
-	void setID(String iD) {
-		ID = iD;
-	}
-	String getPublicUUID() {
-		return publicUUID;
-	}
-	void setPublicUUID(String publicUUID) {
-		this.publicUUID = publicUUID;
 	}
 }
