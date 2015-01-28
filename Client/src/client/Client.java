@@ -30,7 +30,6 @@ public class Client extends User {
 	void SignIn(String pass) throws IOException {
 		signIn = true;
 		
-		// TODO
 		SignIn si = new SignIn(pass, this);
 		sendToServer(si);
 	}

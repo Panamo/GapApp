@@ -9,16 +9,16 @@ public class SignIn extends Command {
 	SignIn(String pass, Client client) throws IOException {
 		if (client.getSihnIn()) {
 			setVerb("signin");
-			client.SignIn(pass);
 		} else {
 			setVerb("signout");
-			client.SignOut();
 		}
 		this.pass = pass;
 		setSender(client);
 	}
 	
 	String getPass() {
+		String pass = this.pass;
+		this.pass = null;
 		return pass;
 	}
 }
