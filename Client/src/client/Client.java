@@ -79,10 +79,18 @@ public class Client extends User {
 					+ " " + ((MessageCmd) cmd).getData().getBytes().length
 					+ "\n" + ((MessageCmd) cmd).getData();
 		} else {
-			msg = cmd.getVerb() + " " + cmd.getReceiver().getID() + " "
-					+ ((LeJIn) cmd).getUser().getID() + " 0"; // TODO send
-																// senderID to
-																// server
+			if (cmd.getVerb().equals("signin")) {
+
+				msg = cmd.getVerb() + " capac " + cmd.getSender().getID() + " "
+						+ ((SignIn) cmd).getPass().getBytes().length + "\n"
+						+ ((SignIn) cmd).getPass();
+			} else {
+				msg = cmd.getVerb() + " " + cmd.getReceiver().getID() + " "
+						+ ((LeJIn) cmd).getUser().getID() + " 0"; // TODO send
+																	// senderID
+																	// to
+																	// server
+			}
 		}
 
 		PrintWriter out = new PrintWriter(serverSocket.getOutputStream());

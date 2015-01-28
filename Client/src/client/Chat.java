@@ -17,14 +17,12 @@ public class Chat {
 	private String iD;
 	private String name;
 	private boolean isGroup;
-	// private ArrayList<User> members;
 	private HashMap<String, User> membMap;
 	private ArrayList<Message> messages;
 
 	public Chat(String ID, String name) {
 		this.name = name;
 		this.iD = ID;
-		// members = new ArrayList<User>();
 		membMap = new HashMap<>();
 	}
 
@@ -62,13 +60,11 @@ public class Chat {
 
 	void addToMembers(User user) {
 
-		// members.add(user);
 		membMap.put(user.getID(), user);
 	}
 
 	void removeFromMembers(User user) {
 
-		// members.remove(user);
 		membMap.replace(user.getID(), user);
 	}
 

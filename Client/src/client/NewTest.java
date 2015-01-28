@@ -8,9 +8,11 @@ public class NewTest {
 	
 	public static void main(String[] args) throws UnknownHostException, IOException {
 		
-		Client me = new Client(new Socket("localhost", 1373));
+		Client me = new Client(new Socket("192.168.169.199", 1373));
 		me.setName("navid");
 		me.setID("kapak");
+		SignIn si = new SignIn("chapal", me);
+		me.sendToServer(si);
 		User user = new User();
 		user.setID("chapal");
 		user.setName("mrma95");
