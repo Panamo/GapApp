@@ -98,14 +98,14 @@ public class Client extends User {
 		out.flush();
 	}
 
-	void listener(String firstLine, String body) throws IOException {
+	void listener(String firstLine, String body) throws IOException { // TODO handle close verb
 
 		String[] fLH = firstLine.split(" ");
 
 		if (fLH[0].equals("send")) {
 
-			String senderID = fLH[1];
-			String chatID = fLH[2];
+			String chatID = fLH[1];
+			String senderID = fLH[2];
 
 			chatMap.get(chatID).writeMessageInFile(senderID, body);
 

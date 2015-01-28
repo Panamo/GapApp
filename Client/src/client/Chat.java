@@ -92,6 +92,18 @@ public class Chat {
 		return isGroup;
 	}
 
+	public int getIsThereNew() {
+		return isThereNew;
+	}
+
+	public void setIsThereNew(int isThereNew) {
+		this.isThereNew = isThereNew;
+	}
+
+	public ArrayList<Message> getMessages() {
+		return messages;
+	}
+	
 	void writeMessageInFile(String senderID, String msg) throws IOException {
 		File file = new File(iD);
 
@@ -111,18 +123,6 @@ public class Chat {
 			isThereNew++;
 		}
 
-	}
-
-	public int getIsThereNew() {
-		return isThereNew;
-	}
-
-	public void setIsThereNew(int isThereNew) {
-		this.isThereNew = isThereNew;
-	}
-
-	public ArrayList<Message> getMessages() {
-		return messages;
 	}
 
 	void readFile() throws IOException {
