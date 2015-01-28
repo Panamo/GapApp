@@ -22,6 +22,7 @@ public class ReceiveThread extends Thread {
 
 				int number = 0;
 				String firstLine = in.readLine();
+				System.out.println(firstLine); // TODO delete it after done whit it
 				String[] fLH = firstLine.split(" ");
 				number = Integer.valueOf(fLH[3]);
 				char[] charArr = new char[number];
