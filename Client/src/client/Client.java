@@ -111,8 +111,8 @@ public class Client extends User {
 
 		} else {
 			if (fLH[0].equals("invite")) {
-				String senderID = fLH[1];
-				String chatID = fLH[2];
+				String chatID = fLH[1];
+				String senderID = fLH[2];
 
 				// TODO
 			} else if (fLH[0].equals("deliver")) {
