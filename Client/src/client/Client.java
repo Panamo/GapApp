@@ -92,7 +92,7 @@ public class Client extends User {
 					+ "\n" + ((MessageCmd) cmd).getData();
 		} else {
 			if (cmd.getVerb().equals("signin")) {
-				msg = cmd.getVerb() + " " + ((SignIn) cmd).getPass() + " " + cmd.getSender().getID() + " 0\n";
+				msg = cmd.getVerb() + " " + cmd.getSender().getID() + " " + ((SignIn) cmd).getPass() + " 0\n";
 			} else {
 				msg = cmd.getVerb() + " " + cmd.getReceiver().getID() + " "
 						+ ((LeJIn) cmd).getUser().getID() + " 0"; // TODO send
