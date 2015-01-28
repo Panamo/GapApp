@@ -49,7 +49,7 @@ public class ChatFrame extends JFrame {
         });
 
 		JEditorPane editorPane = new JEditorPane();
-		editorPane.setFont(new Font("Trebuchet MS", Font.PLAIN, 11));
+		editorPane.setFont(new Font("Monaco", Font.PLAIN, 15));
 		editorPane.setBounds(10, 299, 488, 85);
 		contentPane.add(editorPane);
 
@@ -58,6 +58,7 @@ public class ChatFrame extends JFrame {
 		contentPane.add(scrollPane);
 
 		textPane = new JTextPane();
+		textPane.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		textPane.setEditable(false);
 		scrollPane.setViewportView(textPane);
 		
@@ -122,16 +123,26 @@ public class ChatFrame extends JFrame {
 				}
 			}
 		});
-		sendButton.setBounds(508, 345, 97, 39);
+		sendButton.setBounds(508, 348, 97, 36);
 		contentPane.add(sendButton);
 		
-		JButton btnNewButton = new JButton("Show more");
+		JButton btnNewButton = new JButton("More");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnNewButton.setBounds(508, 299, 97, 39);
+		btnNewButton.setBounds(508, 317, 97, 29);
 		contentPane.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Invite");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnNewButton_1.setBounds(508, 293, 97, 23);
+		contentPane.add(btnNewButton_1);
+		
+		getRootPane().setDefaultButton(sendButton);
 
 	}
 
